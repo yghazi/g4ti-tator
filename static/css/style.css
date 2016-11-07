@@ -1,0 +1,6 @@
+.text-editor{
+	background: #eee;
+	border:1px solid #ddd;
+	outline: none;
+	height: 300px;
+}
