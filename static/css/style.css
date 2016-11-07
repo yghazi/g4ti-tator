@@ -4,3 +4,7 @@
 	outline: none;
 	height: 300px;
 }
+
+.navbar-inverse{
+	border-radius: 0px !important;
+}
