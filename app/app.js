@@ -1,10 +1,16 @@
-var app = angular.module("annotator-app",['ngRoute','ngAnimate']);
+var app = angular.module("tator-app",['ngRoute','ngAnimate','ui.bootstrap','ngSanitize']);
 
 app.config(function($routeProvider){
+
+    //$qProvider.errorOnUnhandledRejections(false);
 	$routeProvider
 		.when("/home",{
-			templateUrl:"app/views/home/index.html",
-			controller:"homeController"
+			templateUrl:"app/views/document/document.html",
+			controller:"documentController"
 		})
-		.otherwise({redirectTo:'/home'})
+		.when("/",{
+			templateUrl: "app/views/landing/landing.html",
+			controller: "landingController"
+		})
+		.otherwise({redirectTo:'/'})
 })
