@@ -1,18 +1,29 @@
 <div class="container-fluid content">
     <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
+        <div class="col-md-9">
+            <div class="panel panel-default1">
                 <div class="panel-heading">
                     <div class="text-right toolbar">
                         <i ng-click="fontsize('i')" class="glyphicon glyphicon-zoom-in"></i>
                         <i ng-click="fontsize('d')" class="glyphicon glyphicon-zoom-out"></i>
                         <i ng-click="lineheight('i')" class="fa fa-text-height" aria-hidden="true"></i>
                         <i ng-click="traindata()" class="glyphicon glyphicon-floppy-saved "></i>
-
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="editor_wpr" ng-mouseup="getSelectionText()" contenteditable="true" ng-bind-html="full_document"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="panel-headingn">
+                    <h2>Tags</h2>
+                </div>
+                <div class="panel-body">
+                    <p class="legend-highlight" ng-repeat="(k,t) in tags" style="background-color: {{t.color}} ">
+                        {{k}} <span class="badge">{{t.count}}</span>
+                    </p>
                 </div>
             </div>
         </div>

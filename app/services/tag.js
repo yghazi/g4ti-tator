@@ -2,11 +2,26 @@
  * Created by geek007 on 12/25/16.
  */
 'use strict';
-app.service('tag', function (colorpalette) {
+app.service('tag', function (colorpalette, api) {
     var tags = {};
     var c = {};
     var allowed_tags = [];
+    var tags_count = {};
 
+    this.stats = function (tag, color) {
+        if (tags_count.hasOwnProperty(tag)) {
+            tags_count[tag]["count"] = tags_count[tag]["count"] + 1;
+
+        } else {
+            tags_count[tag] = {"count": 1, color: color}
+        }
+
+    };
+
+    this.getStats = function () {
+
+        return tags_count;
+    };
 
     this.add = function (parent_word, nextword, tag) {
 
@@ -14,19 +29,25 @@ app.service('tag', function (colorpalette) {
             if (allowed_tags.indexOf(tag) < 0) {
                 allowed_tags.push(tag)
             }
+
+            if (typeof nextword == 'object') {
+                nextword = nextword.join(" ");
+            }
+
             tags[parent_word] = {
                 tag: tag,
-                nextword: []
+                count: 0,
+                nextWords: nextword
             }
 
         } else {
             if (parent_word != nextword) {
                 var nextwords = tags[parent_word]['nextword'];
                 if (nextwords.indexOf(nextword) < 0) {
-                    tags[parent_word]['nextword'].push(nextword)
+                    tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
+                    tags[parent_word]['nextWords'].concat(" ").concat(nextword);
                 }
             }
-
 
 
         }
@@ -34,23 +55,24 @@ app.service('tag', function (colorpalette) {
 
     var colorCount = 0;
     this.highlight = function (word) {
-        var parts = word.split("-");
+        var position = word.indexOf("-");
         var tagd = [];
-        var color = colorpalette.getColor(c);
 
-        if (parts.length == 2) {
-            var tag_name = parts[1];
-            var color = "yellow";
-            if (c.hasOwnProperty(tag_name)) {
-                color = c[tag_name];
-            } else {
-                color = colorpalette.getColor(colorCount);
-                c[tag_name] = color;
-                colorCount++;
-            }
-            tagd[0] = parts[1];
-            tagd[1] = color;
+        var tag_name = word;
+        if (position == 1) {
+            tag_name = word.substr(position+1);
         }
+        var color = "yellow";
+        if (c.hasOwnProperty(tag_name)) {
+            color = c[tag_name];
+        } else {
+            color = colorpalette.getColor(colorCount);
+            c[tag_name] = color;
+            colorCount++;
+        }
+        tagd[0] = tag_name;
+        tagd[1] = color;
+
         return tagd;
 
     };
@@ -69,8 +91,7 @@ app.service('tag', function (colorpalette) {
         })
         var regexStr = fkeys.join("\\b|\\b").replace(/\\b\.\\b\|/g, "");
         var regex = new RegExp("\\b" + regexStr + "\\b", "gi")
-        console.log(regexStr)
-        console.log(regex)
+
         content = content.replace(regex, function (matchedKey) {
 
             var color = "";
@@ -118,13 +139,27 @@ app.service('tag', function (colorpalette) {
 
          })*/
         return content;
-    }
+    };
 
     this.getAll = function () {
-        return tags;
-    }
+        return tags
 
-    this.getAllowedTags = function(){
-        return allowed_tags;
+    };
+
+    this.getAllowedTags = function () {
+        api.get('tags', function (res) {
+
+            if (res.status == 200) {
+                if (typeof localStorage != undefined) {
+
+                    localStorage.setItem('tags', JSON.stringify(res.data));
+                }
+            }
+
+        }, function (err) {
+            console.log(err)
+        });
+
+        return localStorage.getItem('tags');
     }
 })

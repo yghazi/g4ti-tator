@@ -140,10 +140,21 @@
 }
 
 .text-highlight{
-	padding: 1px 3px;
-	background: rgba(255, 255, 0, 0.25);
+	padding: 1px 5px;
+    background: rgba(255, 255, 0, 0.25);
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 2px 2px;
 }
-
+.legend-highlight{
+	padding: 4px 5px;
+    background: rgba(255, 255, 0, 0.25);
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 4px 2px;
+    display: inline-block;
+}
 .toolbar i{
 	cursor: pointer;
 	font-size: 18px;
@@ -157,6 +168,11 @@
 }
 
 .editor_wpr{
-	font-size: 1em;
-	white-space: pre-wrap;
+	font-size: 1.2em;
+    white-space: pre-line;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    text-align: justify;
+    font-family: inherit;
+    min-height: 400px;
 }
