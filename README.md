@@ -29,3 +29,10 @@ cd tator
 
 bower install
 ```
+### Run tator front-end ###
+
+```
+#!bash
+
+http-server -p 8090
+```
