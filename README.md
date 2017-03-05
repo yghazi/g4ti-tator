@@ -20,3 +20,12 @@ npm install -g http-server
 npm install -g bower
 
 ```
+
+### Install tator deps using bower ###
+
+```
+#!bash
+cd tator
+
+bower install
+```
