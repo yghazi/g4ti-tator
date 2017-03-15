@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 
-    <script type="text/javascript" src="bower_components/readability/Readability.js"></script>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -27,6 +26,7 @@
     <script type="text/javascript" src="app/directives/directive.js"></script>
 	<script type="text/javascript" src="app/controllers/documentController.js"></script>
     <script type="text/javascript" src="app/controllers/landingController.js"></script>
+    <script type="text/javascript" src="app/controllers/settingsController.js"></script>
 
 </head>
 <body>
@@ -42,7 +42,10 @@
             <a class="navbar-brand" href="#">tator</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/#!/setting/">Settings</a></li>
+              </ul>
+
             
           </div><!--/.nav-collapse -->
         </div><!--/.container -->

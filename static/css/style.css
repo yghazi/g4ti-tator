@@ -176,3 +176,7 @@
     font-family: inherit;
     min-height: 400px;
 }
+
+.auth_url_section{
+	margin-bottom: 20px;
+}
