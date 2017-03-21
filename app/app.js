@@ -1,3 +1,4 @@
+'use strict';
 var app = angular.module("tator-app",['ngRoute','ngAnimate','ui.bootstrap','ngSanitize']);
 
 app.config(function($routeProvider){
