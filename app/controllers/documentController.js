@@ -41,6 +41,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     $uibModalInstance.close();
                 };
 
+
                 $scope.addTag = function () {
                     
                     var doc = $('.editor_wpr').text();
@@ -61,7 +62,11 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     tag.add(wordParts[0], nextwords, key);
                     var word = '<span style="background-color:' + meta[1] + '" class="text-highlight" title="' + label + '">' + $scope.selectedText + ' <i class="glyphicon glyphicon-remove-circle"></i></span>';
                     var text = $rootScope.full_document.$$unwrapTrustedValue();
-                    var pat_text = $scope.selectedText.concat("\\b");
+                    var pat_text = $scope.selectedText;
+
+                    pat_text = tag.escapeRegExp(pat_text);
+                    pat_text = pat_text.concat("\\b");
+                    console.log(pat_text)
                     var pattern = new RegExp(pat_text, 'g');
                     var updated_text = text.replace(pattern, word);
                     $rootScope.full_document = $sce.trustAsHtml(updated_text);

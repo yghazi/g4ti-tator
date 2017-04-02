@@ -18,6 +18,10 @@ app.service('tag', function (colorpalette, api) {
 
     };
 
+    this.escapeRegExp  = function (str) {
+      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    }
+
     this.getStats = function () {
 
         return tags_count;
