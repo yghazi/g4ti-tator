@@ -11,6 +11,20 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
     var allowed_tags = [];
     var data = $scope.data;
 
+    $scope.sort = function(obj){
+
+        var sortable = [];
+        for (var item in obj) {
+            sortable.push([item, obj[item]]);
+        }
+
+        sortable.sort(function(a, b) {
+            return b[1] - a[1];
+        });
+        return sortable;
+
+    }
+
     $scope.open = function () {
         var options = {
             animation: true,
@@ -76,7 +90,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
     $scope.$watch('selectedText', function (newval, oldval) {
         if (newval != oldval) {
             $scope.open();
-            $scope.tags = tag.getStats();
+            $scope.tags = $scope.sort(tag.getStats());
         }
     });
     $scope.$watch('data', function () {

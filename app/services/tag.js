@@ -43,9 +43,11 @@ app.service('tag', function (colorpalette, api) {
         } else {
             if (parent_word != nextword) {
                 var nextwords = tags[parent_word]['nextword'];
-                if (nextwords.indexOf(nextword) < 0) {
-                    tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
-                    tags[parent_word]['nextWords'].concat(" ").concat(nextword);
+                if (nextwords instanceof Array){ 
+                    if(nextwords.indexOf(nextword) < 0) {
+                        tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
+                        tags[parent_word]['nextWords'].concat(" ").concat(nextword);
+                    }
                 }
             }
 
