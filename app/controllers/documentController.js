@@ -44,7 +44,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
                 $scope.addTag = function () {
                     
-                    var doc = $('.editor_wpr').text();
+                    var doc = $('.editor_wpr').html();
                     $rootScope.full_document = $sce.trustAsHtml(doc);
                     
                     var key = $scope.currentTag.tag;
