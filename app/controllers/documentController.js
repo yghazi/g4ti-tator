@@ -15,7 +15,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
         var sortable = [];
         for (var item in obj) {
-            sortable.push([item, obj[item]]);
+            sortable.push([item, obj[item].count, obj[item].color]);
         }
 
         sortable.sort(function(a, b) {
@@ -66,7 +66,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
                     pat_text = tag.escapeRegExp(pat_text);
                     pat_text = pat_text.concat("\\b");
-                    console.log(pat_text)
+                    //console.log(pat_text)
                     var pattern = new RegExp(pat_text, 'g');
                     var updated_text = text.replace(pattern, word);
                     $rootScope.full_document = $sce.trustAsHtml(updated_text);
@@ -99,7 +99,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
     $scope.$watch('selectedText', function (newval, oldval) {
         if (newval != oldval) {
             $scope.open();
-            $scope.tags = $scope.sort(tag.getStats());
+            $scope.tags = tag.getStats();
         }
     });
     $scope.$watch('data', function () {
