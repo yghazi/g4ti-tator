@@ -25,6 +25,11 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
     }
 
+
+    $scope.remove_tag = function(text){
+        console.log(text)
+    }
+
     $scope.open = function () {
         var options = {
             animation: true,
@@ -37,9 +42,12 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     $uibModalInstance.close();
                 };
 
+
                 $scope.ok = function () {
                     $uibModalInstance.close();
                 };
+
+
 
 
                 $scope.addTag = function () {
@@ -60,7 +68,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     tag.stats(label, meta[1]);
 
                     tag.add(wordParts[0], nextwords, key);
-                    var word = '<span style="background-color:' + meta[1] + '" class="text-highlight" title="' + label + '">' + $scope.selectedText + ' <i class="glyphicon glyphicon-remove-circle"></i></span>';
+                    var word = '<span tag="'+key+'" style="background-color:' + meta[1] + '" class="text-highlight" title="' + label + '">' + $scope.selectedText + ' <i class="glyphicon glyphicon-remove-circle remove_tag"></i></span>';
                     var text = $rootScope.full_document.$$unwrapTrustedValue();
                     var pat_text = $scope.selectedText;
 
@@ -168,7 +176,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     tag.stats(meta[0], meta[1])
                     $scope.add(parent_word, word, meta[0]);
 
-                    word = '<span style="background-color:' + meta[1] + '" class="text-highlight" title="' + meta[0] + '">' + word + ' <i class="glyphicon glyphicon-remove-circle"></i></span>';
+                    word = '<span tag="" style="background-color:' + meta[1] + '" class="text-highlight" title="' + meta[0] + '">' + word + ' <i class="glyphicon glyphicon-remove-circle"></i></span>';
                 } else {
                     parent_word = "";
                 }
@@ -226,4 +234,18 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
         }
 
     }
+
+    $(".editor_wpr").on('click','.remove_tag', function(){
+        var item = $(this).closest('span');
+        var old_text =  item.text();
+        var label = item.attr('title');
+        var key = item.attr('tag');
+        var withHtml = item[0].outerHTML
+        var editor_html = $(".editor_wpr").html();
+        var remove_pattern = new RegExp(withHtml,'g');
+        $(".editor_wpr").html(editor_html.replace(remove_pattern, old_text));
+        tag.remove_from_stats(label)
+        tag.remove_from_tags(old_text.trim())
+        $scope.$apply();
+    })
 });

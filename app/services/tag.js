@@ -8,6 +8,13 @@ app.service('tag', function (colorpalette, api) {
     var allowed_tags = [];
     var tags_count = {};
 
+    this.remove_from_stats = function(tag){
+        delete tags_count[tag];
+    }
+    this.remove_from_tags = function(tag){
+        console.log(delete tags[tag])
+    }
+
     this.stats = function (tag, color) {
         if (tags_count.hasOwnProperty(tag)) {
             tags_count[tag]["count"] = tags_count[tag]["count"] + 1;
