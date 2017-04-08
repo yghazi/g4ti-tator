@@ -57,9 +57,12 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     
                     var key = $scope.currentTag.tag;
                     var label = $scope.currentTag.name;
-                    var wordParts = $scope.selectedText.split(' ');
+                    var wordParts = $scope.selectedText.trim().split(' ');
+
+                    var keyword = "";
                     var nextwords = [];
                     if (wordParts.length > 1) {
+
                         nextwords = wordParts.slice(1)
                     }
 

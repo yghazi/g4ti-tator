@@ -41,25 +41,25 @@ app.service('tag', function (colorpalette, api) {
                 allowed_tags.push(tag)
             }
 
-            if (typeof nextword == 'object') {
-                nextword = nextword.join(" ");
-            }
+            //if (typeof nextword == 'object') {
+            //    nextword = nextword.join(" ");
+            //}
 
             tags[parent_word] = {
                 tag: tag,
                 count: 0,
-                nextWords: nextword
+                nextWords:[nextword]
             }
 
         } else {
             if (parent_word != nextword) {
-                var nextwords = tags[parent_word]['nextword'];
-                if (nextwords instanceof Array){ 
-                    if(nextwords.indexOf(nextword) < 0) {
+                //var nextwords = tags[parent_word]['nextword'];
+                //if (nextwords instanceof Array){ 
+                  //  if(nextwords.indexOf(nextword) < 0) {
                         tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
-                        tags[parent_word]['nextWords'].concat(" ").concat(nextword);
-                    }
-                }
+                        tags[parent_word]['nextWords'].push(nextword);
+                   // }
+               // }
             }
 
 
