@@ -71,14 +71,15 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
                     tag.stats(label, meta[1]);
 
                     tag.add(wordParts[0], nextwords, key);
-                    var word = '<span tag="'+key+'" style="background-color:' + meta[1] + '" class="text-highlight" title="' + label + '">' + $scope.selectedText + ' <i class="glyphicon glyphicon-remove-circle remove_tag"></i></span>';
+                    var word = '<span tag="'+key+'" style="background-color:' + meta[1] + '" class="text-highlight" title="' + label + '">' + $scope.selectedText + '<i class="glyphicon glyphicon-remove-circle remove_tag"></i></span>';
                     var text = $rootScope.full_document.$$unwrapTrustedValue();
                     var pat_text = $scope.selectedText;
 
                     pat_text = tag.escapeRegExp(pat_text);
-                    pat_text = pat_text.concat("\\b");
-                    //console.log(pat_text)
+                    pat_text = pat_text.concat("(?!\<i)");
+                    
                     var pattern = new RegExp(pat_text, 'g');
+                    console.log(pattern)
                     var updated_text = text.replace(pattern, word);
                     $rootScope.full_document = $sce.trustAsHtml(updated_text);
                     $scope.ok();
