@@ -240,7 +240,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
     $(".editor_wpr").on('click','.remove_tag', function(){
         var item = $(this).closest('span');
-        var old_text =  item.text();
+        var old_text =  item.text().trim();
         var label = item.attr('title');
         var key = item.attr('tag');
         var withHtml = item[0].outerHTML
@@ -248,7 +248,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
         var remove_pattern = new RegExp(withHtml,'g');
         $(".editor_wpr").html(editor_html.replace(remove_pattern, old_text));
         tag.remove_from_stats(label)
-        tag.remove_from_tags(old_text.trim())
+        tag.remove_from_tags(old_text)
         $scope.$apply();
     })
 });

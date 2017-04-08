@@ -53,11 +53,29 @@ app.service('tag', function (colorpalette, api) {
 
         } else {
             if (parent_word != nextword) {
+                var add = true;
+                var next_word = tags[parent_word]['nextWords'];
+                
+                next_word.forEach(function(words){
+                    if(words.length == nextword.length){
+                        words.forEach(function(w,i){
+                            if(w != nextword[i]){
+                                add = true;
+                                return;
+                            }
+
+                            add = false;
+
+                        })
+                    }
+
+                })
                 //var nextwords = tags[parent_word]['nextword'];
                 //if (nextwords instanceof Array){ 
                   //  if(nextwords.indexOf(nextword) < 0) {
                         tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
-                        tags[parent_word]['nextWords'].push(nextword);
+                        if(add)
+                            tags[parent_word]['nextWords'].push(nextword);
                    // }
                // }
             }
