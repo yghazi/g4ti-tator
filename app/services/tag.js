@@ -9,10 +9,10 @@ app.service('tag', function (colorpalette, api) {
     var tags_count = {};
 
     this.remove_from_stats = function(tag){
-        delete tags_count[tag];
+        tags_count[tag] =  undefined;
     }
     this.remove_from_tags = function(tag){
-        console.log(delete tags[tag])
+        tags[tag] = undefined
     }
 
     this.stats = function (tag, color) {

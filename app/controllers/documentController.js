@@ -52,7 +52,12 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
                 $scope.addTag = function () {
                     
-                    var doc = $('.editor_wpr').html();
+                    function decodeHtml(html) {
+                        var txt = document.createElement("textarea");
+                        txt.innerHTML = html;
+                        return txt.value;
+                    }
+                    var doc = unescape($('.editor_wpr').html());
                     $rootScope.full_document = $sce.trustAsHtml(doc);
                     
                     var key = $scope.currentTag.tag;
@@ -72,14 +77,15 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
                     tag.add(wordParts[0], nextwords, key);
                     var word = '<span tag="'+key+'" style="background-color:' + meta[1] + '" class="text-highlight" title="' + label + '">' + $scope.selectedText + '<i class="glyphicon glyphicon-remove-circle remove_tag"></i></span>';
-                    var text = $rootScope.full_document.$$unwrapTrustedValue();
+                    var text = decodeHtml($rootScope.full_document.$$unwrapTrustedValue());
                     var pat_text = $scope.selectedText;
-
+                    console.log(pat_text)
                     pat_text = tag.escapeRegExp(pat_text);
                     pat_text = pat_text.concat("(?!\<i)");
                     
                     var pattern = new RegExp(pat_text, 'g');
                     console.log(pattern)
+                    console.log(text)
                     var updated_text = text.replace(pattern, word);
                     $rootScope.full_document = $sce.trustAsHtml(updated_text);
                     $scope.ok();
@@ -248,6 +254,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
         var editor_html = $(".editor_wpr").html();
         var remove_pattern = new RegExp(withHtml,'g');
         $(".editor_wpr").html(editor_html.replace(remove_pattern, old_text));
+        $scope.$apply();
         tag.remove_from_stats(label)
         tag.remove_from_tags(old_text)
         $scope.$apply();
