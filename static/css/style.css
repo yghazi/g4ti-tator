@@ -180,3 +180,8 @@
 .auth_url_section{
 	margin-bottom: 20px;
 }
+
+.remove_tag{
+	top:2px !important;
+	left: 3px !important;
+}

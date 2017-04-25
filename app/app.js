@@ -13,6 +13,10 @@ app.config(function($routeProvider){
             templateUrl:"app/views/setting/index.html",
             controller:"setting_controller"
         })
+		.when("/traningset/",{
+			templateUrl: "app/views/ts/edit.html",
+			controller: "editController"
+		})	
 		.when("/",{
 			templateUrl: "app/views/landing/landing.html",
 			controller: "landingController"
