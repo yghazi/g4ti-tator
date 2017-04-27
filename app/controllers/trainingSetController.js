@@ -202,7 +202,7 @@ app.controller("editController",function($scope, $sce,tag, $uibModal, $rootScope
 
     $scope.fontsize = function (input) {
         if (input == "i") {
-            var font_size = postarseInt($(".editor_wpr").css("font-size"));
+            var font_size = parseInt($(".editor_wpr").css("font-size"));
             if (font_size < 60) {
                 $(".editor_wpr").css("font-size", ++font_size);
             }
