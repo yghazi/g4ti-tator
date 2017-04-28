@@ -149,7 +149,7 @@ app.controller("editController",function($scope, $sce,tag, $uibModal, $rootScope
 			      		for(let j=i+1; j< tagged_words.length; j++){
 			      			let nitem = tagged_words[j];
 							if(nitem.length == 2){
-								if(!nitem[1].startsWith("I-")){
+								if(nitem[1] != undefined && !nitem[1].startsWith("I-")){
 									break;
 								}
 								nextwords.push(nitem[0])
