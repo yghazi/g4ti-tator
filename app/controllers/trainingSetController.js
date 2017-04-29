@@ -129,10 +129,10 @@ app.controller("editController",function($scope, $sce,tag, $uibModal, $rootScope
 			    		if(i+1 in lines){
 			    			m  = $scope.spltByTab(lines[i+1])
 			    			if(m[0] != ","){
-			    				output += "&nbsp;";
+			    				output += " ";
 			    			}
 			    		}else{
-			    			output += "&nbsp;";
+			    			output += " ";
 			    		}
 			    		
 			        }
@@ -153,14 +153,16 @@ app.controller("editController",function($scope, $sce,tag, $uibModal, $rootScope
 									break;
 								}
 								nextwords.push(nitem[0])
-								ws_to_hgihlight += "&nbsp;"+ nitem[0]
+								ws_to_hgihlight += " "+ nitem[0]
 								i = j
 							}			      			
 			      		}
 			      		tag.add(item[0], nextwords, item[1]);
-			      		let pat_text = ws_to_hgihlight.concat("(?!\<i)")
-                    	let pattern = new RegExp(pat_text, 'g');
-                    	let p = tag.highlight(item[1])
+			      		let pat_text = tag.escapeRegExp(ws_to_hgihlight).concat("(?!\<i)")
+			      		let pattern = new RegExp(pat_text, 'g');
+                    	let p = tag.highlight(item[1]);
+                    	console.log(output);
+                    	console.log(pattern);
                     	output = output.replace(pattern, '<span class="text-highlight" style="background:'+p[1]+'" title="'+ p[0]+'">'+ ws_to_hgihlight +'<i class="glyphicon glyphicon-remove-circle remove_tag" title="remove tag"></i></span>')
 			      		test.push([ws_to_hgihlight, item[1]])
 			      	}
