@@ -5,7 +5,7 @@
 app.controller('documentController', function ($scope, $http, config, api, $uibModal, tag, $sce, $rootScope) {
     $scope.allTags = [];
     $scope.tagObj = tag
-
+    $rootScope.full_document = "";
     $scope.data = api.getDocument();
     var selectedText = "";
     var allowed_tags = [];
@@ -35,6 +35,8 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
             animation: true,
             templateUrl: 'app/views/home/tag.html',
             controller: function ($scope, $uibModalInstance, tag, api, $location, $rootScope) {
+                
+
                 $scope.suggestedTags = JSON.parse(tag.getAllowedTags());
 
                 $scope.selectedText = selectedText;
@@ -96,6 +98,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
         $uibModal.open(options);
 
 
+
     };
 
 
@@ -114,9 +117,10 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
 
 
     $scope.$watch('selectedText', function (newval, oldval) {
-        if (newval != oldval) {
+        if (newval != oldval && newval != null) {
             $scope.open();
             $scope.tags = tag.getStats();
+            $scope.selectedText = null;
         }
     });
     $scope.$watch('data', function () {

@@ -7,15 +7,15 @@ app.service('tag', function (colorpalette, api) {
     var c = {};
     var allowed_tags = [];
     var tags_count = {};
-
-    this.remove_from_stats = function(tag){
+    var instance = this;
+    instance.remove_from_stats = function(tag){
         tags_count[tag] =  undefined;
     }
-    this.remove_from_tags = function(tag){
+    instance.remove_from_tags = function(tag){
         tags[tag] = undefined
     }
 
-    this.stats = function (tag, color) {
+    instance.stats = function (tag, color) {
         if (tags_count.hasOwnProperty(tag)) {
             tags_count[tag]["count"] = tags_count[tag]["count"] + 1;
 
@@ -25,16 +25,23 @@ app.service('tag', function (colorpalette, api) {
 
     };
 
-    this.escapeRegExp  = function (str) {
+    instance.escapeRegExp  = function (str) {
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
 
-    this.getStats = function () {
-
-        return tags_count;
+    instance.getStats = function () {
+      return tags_count;
     };
 
-    this.add = function (parent_word, nextword, tag) {
+
+    instance.cleanTag = function(input){
+      return input.replace(/^[B-I]-/,"")
+    }
+
+
+    instance.add = function (parent_word, nextword, tag) {
+        tag = instance.cleanTag(tag)
+        console.log(parent_word + " => " + nextword +" => "+ tag)
 
         if (!tags.hasOwnProperty(parent_word)) {
             if (allowed_tags.indexOf(tag) < 0) {
@@ -55,7 +62,7 @@ app.service('tag', function (colorpalette, api) {
             if (parent_word != nextword) {
                 var add = true;
                 var next_word = tags[parent_word]['nextWords'];
-                
+
                 next_word.forEach(function(words){
                     if(words.length == nextword.length){
                         words.forEach(function(w,i){
@@ -71,7 +78,7 @@ app.service('tag', function (colorpalette, api) {
 
                 })
                 //var nextwords = tags[parent_word]['nextword'];
-                //if (nextwords instanceof Array){ 
+                //if (nextwords instanceof Array){
                   //  if(nextwords.indexOf(nextword) < 0) {
                         tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
                         if(add)
@@ -85,7 +92,7 @@ app.service('tag', function (colorpalette, api) {
     };
 
     var colorCount = 0;
-    this.highlight = function (word) {
+    instance.highlight = function (word) {
         var position = word.indexOf("-");
         var tagd = [];
 
@@ -109,7 +116,7 @@ app.service('tag', function (colorpalette, api) {
     };
 
 
-    this.highlightByRegex = function (tags, content) {
+    instance.highlightByRegex = function (tags, content) {
         var history = {};
         var c = 0;
         var sp = document.createElement("span");
@@ -172,12 +179,12 @@ app.service('tag', function (colorpalette, api) {
         return content;
     };
 
-    this.getAll = function () {
+    instance.getAll = function () {
         return tags
 
     };
 
-    this.getAllowedTags = function () {
+    instance.getAllowedTags = function () {
         api.get('tags', function (res) {
 
             if (res.status == 200) {

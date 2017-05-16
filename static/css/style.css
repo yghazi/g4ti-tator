@@ -184,4 +184,10 @@
 .remove_tag{
 	top:2px !important;
 	left: 3px !important;
+	position: relative;
+}
+
+.remove-tag-options{
+	position: absolute;
+
 }
