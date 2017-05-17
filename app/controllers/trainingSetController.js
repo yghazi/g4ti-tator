@@ -153,7 +153,7 @@ app.controller("editController", function($scope, $sce, tag, $uibModal, $rootSco
                 if (nitem[1] != undefined && !nitem[1].startsWith("I-")) {
                   break;
                 }
-                nextwords.push(nitem[0])
+                nextwords.push(nitem[0].trim())
                 ws_to_hgihlight += " " + nitem[0]
                 i = j
               }
@@ -251,7 +251,20 @@ app.controller("editController", function($scope, $sce, tag, $uibModal, $rootSco
   })
 
   $(".editor_wpr").on('click', '.remove_tag', function() {
-    $(this).append('<ul class="remove-tag-options"><li>Remove this</li><li>Remove all</li></ul>')
-    console.log(tag.getAll())
+    /*$(this).append('<ul class="remove-tag-options"><li>Remove this</li><li>Remove all</li></ul>')
+    console.log(tag.getAll())*/
+
+		var item = $(this).closest('span');
+    var old_text = item.text().trim();
+    var label = item.attr('title');
+    var key = item.attr('tag');
+    var withHtml = item[0].outerHTML
+    var editor_html = $(".editor_wpr").html();
+    var remove_pattern = new RegExp(withHtml, 'g');
+    $(".editor_wpr").html(editor_html.replace(remove_pattern, old_text));
+    $scope.$apply();
+    tag.remove_from_stats(label)
+    tag.remove_from_tags(old_text)
+    $scope.$apply();
   })
 })

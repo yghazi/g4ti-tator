@@ -12,7 +12,10 @@ app.service('tag', function (colorpalette, api) {
         tags_count[tag] =  undefined;
     }
     instance.remove_from_tags = function(tag){
-        tags[tag] = undefined
+      var parts = tag.split(" ")
+      console.log(tag)
+      console.log(tags[parts[0]])
+      tags[parts[0]] = undefined
     }
 
     instance.stats = function (tag, color) {
@@ -41,8 +44,6 @@ app.service('tag', function (colorpalette, api) {
 
     instance.add = function (parent_word, nextword, tag) {
         tag = instance.cleanTag(tag)
-        console.log(parent_word + " => " + nextword +" => "+ tag)
-
         if (!tags.hasOwnProperty(parent_word)) {
             if (allowed_tags.indexOf(tag) < 0) {
                 allowed_tags.push(tag)
@@ -81,8 +82,9 @@ app.service('tag', function (colorpalette, api) {
                 //if (nextwords instanceof Array){
                   //  if(nextwords.indexOf(nextword) < 0) {
                         tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
-                        if(add)
+                        if(add){
                             tags[parent_word]['nextWords'].push(nextword);
+			}
                    // }
                // }
             }
