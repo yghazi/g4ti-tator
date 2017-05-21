@@ -155,7 +155,7 @@ app.controller("editController", function($scope, $sce, tag, $uibModal, $rootSco
                 if (nitem[1] != undefined && !nitem[1].startsWith("I-")) {
                   break;
                 }
-                nextwords.push(nitem[0].trim())
+                nextwords.push(nitem[0])
                 ws_to_hgihlight += " " + nitem[0]
                 i = j
               }
@@ -256,7 +256,7 @@ app.controller("editController", function($scope, $sce, tag, $uibModal, $rootSco
     /*$(this).append('<ul class="remove-tag-options"><li>Remove this</li><li>Remove all</li></ul>')
     console.log(tag.getAll())*/
 
-		var item = $(this).closest('span');
+    var item = $(this).closest('span');
     var old_text = item.text().trim();
     var label = item.attr('title');
     var key = item.attr('tag');
