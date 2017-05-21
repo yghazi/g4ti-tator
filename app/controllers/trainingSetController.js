@@ -122,14 +122,16 @@ app.controller("editController", function($scope, $sce, tag, $uibModal, $rootSco
           }
 
           output += match;
-
+          
           if (match == ".") {
-            output += "<br />";
+            output += " <br />";
           } else {
 
             if (i + 1 in lines) {
               m = $scope.spltByTab(lines[i + 1])
-              if (m[0] != ",") {
+              if(m[0] == "."){
+              }
+              else if (m[0] != ",") {
                 output += " ";
               }
             } else {
