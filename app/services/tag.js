@@ -82,8 +82,9 @@ app.service('tag', function (colorpalette, api) {
                 //if (nextwords instanceof Array){
                   //  if(nextwords.indexOf(nextword) < 0) {
                         tags[parent_word]['count'] = tags[parent_word]['count'] + 1;
-                        if(add)
+                        if(add){
                             tags[parent_word]['nextWords'].push(nextword);
+			}
                    // }
                // }
             }

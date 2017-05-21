@@ -155,7 +155,7 @@ app.controller("editController", function($scope, $sce, tag, $uibModal, $rootSco
                 if (nitem[1] != undefined && !nitem[1].startsWith("I-")) {
                   break;
                 }
-                nextwords.push(nitem[0])
+                nextwords.push(nitem[0].trim())
                 ws_to_hgihlight += " " + nitem[0]
                 i = j
               }
