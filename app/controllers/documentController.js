@@ -11,7 +11,7 @@ app.controller('documentController', function ($scope, $http, config, api, $uibM
     var allowed_tags = [];
     var data = $scope.data;
 
-    $scope.sort = function(obj){
+    $scope.sort = function(obj) {
 
         var sortable = [];
         for (var item in obj) {

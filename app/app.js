@@ -5,6 +5,10 @@ app.config(function($routeProvider){
 
     //$qProvider.errorOnUnhandledRejections(false);
 	$routeProvider
+		.when("/testing/",{
+			templateUrl: "app/views/landing/testing.html",
+			controller: "testingController"
+		})
 		.when("/home",{
 			templateUrl:"app/views/document/document.html",
 			controller:"documentController"
