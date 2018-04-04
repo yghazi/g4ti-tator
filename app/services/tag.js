@@ -147,19 +147,20 @@ app.service('tag', function (colorpalette, api) {
     };
 
     this.getAllowedTags = function () {
+        let tags = localStorage.getItem('tags')
+        if(tags) {
+            return tags
+        }
         api.get('tags', function (res) {
-
             if (res.status == 200) {
                 if (typeof localStorage != undefined) {
-
                     localStorage.setItem('tags', JSON.stringify(res.data));
+                    return localStorage.getItem('tags')
                 }
             }
 
         }, function (err) {
             console.log(err)
         });
-
-        return localStorage.getItem('tags');
     }
 })
