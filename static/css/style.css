@@ -172,7 +172,22 @@
     white-space: pre-line;
     padding: 10px;
     border-top: 1px solid #ddd;
-    text-align: justify;
+    
     font-family: inherit;
     min-height: 400px;
+}
+
+.auth_url_section{
+	margin-bottom: 20px;
+}
+
+.remove_tag{
+	top:2px !important;
+	left: 3px !important;
+	position: relative;
+}
+
+.remove-tag-options{
+	position: absolute;
+
 }

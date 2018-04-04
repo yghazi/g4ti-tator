@@ -2,25 +2,16 @@
     <h3 class="modal-title" id="modal-title">Add Tag</h3>
 </div>
 <div class="modal-body" id="modal-body">
-    <div class="alert alert-info">
-        {{prevTag}}
-    </div>
-
-    <div class="form-group">
+   <div class="form-group">
         <label>Value</label>
         <input type="text" ng-model="selectedText" class="form-control" >
     </div>
     <div class="form-group">
         <label>Tag</label>
-        <select class="form-control"  ng-model="currentTag" ng-options="tag.name as tag.name for tag in suggestedTags "></select>
+        <select class="form-control"  ng-model="currentTag" ng-options="t.name for t in suggestedTags "></select>
     </div>
     <div>
         <button class="btn btn-primary" ng-click="addTag()">Add</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
-
-
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>

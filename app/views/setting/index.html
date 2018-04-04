@@ -1,0 +1,36 @@
+<div class="container-fluid content">
+    <div class="row">
+        <div class="loading-with-text"  ng-show="loading">
+            <i class="glyphicon glyphicon-repeat gly-spin"></i> Please wait  .....
+        </div>
+
+
+        <div class="col-md-6" ng-show="auth_url">
+
+            <div class="auth_url_section">
+
+                <a href="{{auth_url}}" target="_blank" class="btn btn-info">Get Google Auth Code</a>
+            </div>
+
+            <div class="alert alert-danger" ng-show="error_message">
+                {{error_message}}
+            </div>
+
+            <div class="alert alert-success" ng-show="success_message">
+                {{success_message}}
+            </div>
+
+            <div class="form-group">
+                <label>Your Google auth code</label>
+                <textarea class="form-control" ng-model="auth_code"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="submit_code()">Submit</button>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
