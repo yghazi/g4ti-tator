@@ -12,6 +12,9 @@ Clone this repo:
 ```
 git clone https://github.com/yghazi/g4ti-tator.git
 ```
+### Requirements 
+- (Nodejs)[https://nodejs.org/en/]
+- (Http Server)[https://www.npmjs.com/package/http-server]
 
 ### Install nodejs (ubuntu) ###
 
