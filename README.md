@@ -4,6 +4,11 @@ This is the front-end of an annotation tool that allows you to annotate text doc
 ## Configuration #
 
 ### Clone git repo ###
+Repo for backend:
+```
+git clone https://github.com/yghazi/g4ti-nlp-processor.git
+```
+Clone this repo:
 ```
 git clone https://github.com/yghazi/g4ti-tator.git
 ```
