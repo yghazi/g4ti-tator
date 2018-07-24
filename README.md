@@ -35,6 +35,8 @@ brew update
 brew install node
 
 ```
+### Install nodejs (Windows) ###
+There's an installer for Windows that sets up nodejs globally. Make sure you use the NodeJS bash console for executing all the following commands in it.
 
 ### Install http-server and bower globally ###
 ```
@@ -49,7 +51,7 @@ npm install -g bower
 
 ```
 #!bash
-cd tator
+cd g4ti-tator # navigate to the tator directory
 
 bower install
 ```
