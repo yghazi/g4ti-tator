@@ -56,9 +56,10 @@ cd g4ti-tator # navigate to the tator directory
 bower install
 ```
 ### Run tator front-end ###
-
+Once all the requirements have been installed, you can now run the front-end server with the following command. 
 ```
 #!bash
 
 http-server -p 8090
 ```
+Now, in your browser, navigate to `localhost:8090` to view the home page.
